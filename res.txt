@@ -1,0 +1,21 @@
+<script>
+    dataLayer = [];
+
+    dataLayer.push({
+        country: 'DE',
+        language: 'de',
+        device: 'desktop',
+        entity: 'snipes',
+        pageType: 'Category All',
+        userLoginStatus: false,
+        userId: '',
+        variable1: true,
+        variable2: '',
+        customerType: 'new',
+        userIsLoyalty: 'unknown',
+        listResults: 502,
+        topTenProduct: ["00013801128871","00013801898066","00013801929747","00013801929320","00013801693238","00013801929330","00013801927064","00013801900007","00013801929326","00013801896171"]
+    });
+
+    isDirectRequest = true;
+</script>

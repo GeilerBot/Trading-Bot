@@ -15,7 +15,10 @@ def getShoeNumber():
 
         dataListResults = soup.find('script')
 
-        df = open("res.txt")
+        df = open("Monitor-Bot\\res.txt", "w")
+        df.write(str(dataListResults))
+        df.close()
+        df = open("Monitor-Bot\\res.txt", "r")
         read = df.read()
         df.seek(0)
         read
