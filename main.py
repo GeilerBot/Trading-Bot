@@ -11,9 +11,15 @@ import discord
 import random
 import string
 from discord.ext import commands
+
+import nest_asyncio
+nest_asyncio.apply()
+
 intents = discord.Intents.default()
 intents.members = True
 client = commands.Bot(command_prefix='/', intents = intents)
+
+
 
 @client.event
 async def on_ready():
@@ -52,6 +58,9 @@ async def on_ready():
 
 @client.command()
 async def start(ctx):
+    alpaca_url = 'https://paper-api.alpaca.markets'
+    alpaca = tradeapi.REST('PK846E5V8HQPZOR052YA','CeiY5b4wxFwGUClZ3EIAmjFufvhuSISXXbYaXMwg', alpaca_url, api_version='v2')
+    print("bot started")
     current_quote = []
     current_trade = []
     current_bar = []
@@ -67,16 +76,16 @@ async def start(ctx):
             asyncio.set_event_loop(asyncio.new_event_loop())
 
         async def bar_callback(b):
-                # print('bar', b)
+                print('bar', b)
                 current_bar.insert(0, b)
 
         async def trade_callback(t):
-                # print('trade', t)
-                current_trade.insert(0, t)
+                print('trade', t)
+                current_trade.append(t)
 
 
         async def quote_callback(q):
-                # print('quote', q)
+                print('quote', q)
                 current_quote.insert(0, q)
 
         # Initiate Class Instance
@@ -94,18 +103,22 @@ async def start(ctx):
         conn.subscribe_bars(bar_callback, symbols[1])
         conn.run()
 
-    loop = await asyncio.get_event_loop()
+    loop = asyncio.get_event_loop()
 
     while True: 
-        threading.Thread(target=consumer_thread).start()
-        time.sleep(60)
-        loop.run_until_complete(conn.stop_ws())
-        print(f'\n\n\n\n\n\n\nThe results:\n\n{current_trade[0]}')
-        time.sleep(20)
-        current_trade.clear
-        current_quote.clear
-        current_bar.clear
-        await ctx.send(f'This is the current Bar:\n\n{current_bar[0]}')
+        market_time = alpaca.get_clock()
+        if market_time.is_open != False:
+            threading.Thread(target=consumer_thread).start()
+            time.sleep(60)
+            loop.run_until_complete(conn.stop_ws())
+            print(f'The results:\n\n{current_trade[-1]}')
+            time.sleep(1)
+            current_trade.clear
+            current_quote.clear
+            current_bar.clear
+            await ctx.send(f'This is the current Bar:\n\n{current_bar[0]}')
+        else:
+            print('Market is not opened.')
 
 # @client.command(aliases=['8ball', 'test'])
 # async def _8ball(ctx, *, question):
