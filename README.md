@@ -1,2 +1,3 @@
-# Monitor-Bot
-This bot shows releases of several premium stocks in different famous stores like Snipes, Footlocker, Supreme... !!!
+# Trading-Bot
+
+This bot shows Trading-Signals of several stocks and helps people to be Successful in Day-Trading...!!!!!!!!
