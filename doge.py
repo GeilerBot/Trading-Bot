@@ -141,11 +141,11 @@ class Bot(Thread):
                 if last_eng == 0:
                     trade_amt = 0
                 real_time_portfolio_value = portfolio*last_price + money_end
-                webhook5 = DiscordWebhook(url='https://discord.com/api/webhooks/855698858684579860/k8DjBmPGq7bgrfcQgb07vrGxQl6aaAMhOiWVokAXjTitYGWneNt371BvjmhnwQJ6J4TQ', rate_limit_retry=True, content = str(real_time_portfolio_value))
+                webhook5 = DiscordWebhook(url='https://discord./api/webhooks/855698858684579860/k8DjBmPGq7bgrfcQgb07vrGxQl6aaAMhOiWVokAXjTitYGWneNt371BvjmhnwQJ6J4TQ', rate_limit_retry=True, content = str(real_time_portfolio_value))
                 webhook5.execute()
                 if trade_amt > 0 and trade_amt < money_end:
                     buy(trade_amt, price=last_price)
-                    webhook2 = DiscordWebhook(url='https://discord.com/api/webhooks/853694685951295529/luTD_JlSV9uXpnyi-Ft5S877daATTXWzdnpmhJD86Zln-8XPxzRk427CfEbrkNbhOacI', rate_limit_retry=True)
+                    webhook2 = DiscordWebhook(url=url, rate_limit_retry=True)
                     embed2 = DiscordEmbed(title='Bought DogeCoin', description='Bought $ price worth of DogeCoin', color=0xffb029)
                     embed2.set_thumbnail(url='https://upload.wikimedia.org/wikipedia/en/d/d0/Dogecoin_Logo.png')
                     embed2.add_embed_field(name='Price:', value='$ price', inline=True)
@@ -158,7 +158,7 @@ class Bot(Thread):
                 else:
                     if portfolio != 0 and trade_amt != 0:
                         sell(-trade_amt, price=last_price)
-                        webhook3 = DiscordWebhook(url='https://discord.com/api/webhooks/853694685951295529/luTD_JlSV9uXpnyi-Ft5S877daATTXWzdnpmhJD86Zln-8XPxzRk427CfEbrkNbhOacI', rate_limit_retry=True)
+                        webhook3 = DiscordWebhook(url=url, rate_limit_retry=True)
                         embed3 = DiscordEmbed(title='Sell DogeCoin', description='Sold DogeCoin this much', color=0xffb029)
                         embed3.set_thumbnail(url='https://upload.wikimedia.org/wikipedia/en/d/d0/Dogecoin_Logo.png')
                         embed3.add_embed_field(name='Price:', value='$ price', inline=True)
